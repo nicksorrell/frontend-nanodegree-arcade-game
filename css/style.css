@@ -4,6 +4,13 @@ body {
     font-family: sans-serif;
 }
 
+h1.title {
+  color: #fff;
+  text-shadow: 2px 2px 0px #000;
+  font-size: 70px;
+  margin: 0;
+}
+
 #instructions {
   width: 960px;
   margin: 0 auto;
