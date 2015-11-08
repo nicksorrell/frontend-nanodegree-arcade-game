@@ -11,4 +11,4 @@ It's the middle of summer and the heat is up! Make your way to the pool for a co
 - Nabbing a gem will get you extra points
 
 ##About the project
-I made this as part of my Front-End Development Nanodegree @ Udacity. The project boilerplate provided art assets and the game engine, but everything else was left to me to implement.
+I made this as part of my Front-End Development [Nanodegree] (https://www.udacity.com/nanodegree) @ Udacity. The project boilerplate provided art assets and the game engine, but everything else was left to me to implement.
