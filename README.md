@@ -4,6 +4,8 @@ A simple HTML5 Froggerlike.
 
 It's the middle of summer and the heat is up! Make your way to the pool for a cooling swim and some points on your score, but watch out for biting bugs. If you're lucky, you might even find some dropped change in the water for even more points! How high can you get your score?
 
+[Live version] (http://nicksorrell.com/udacity/frogger/)
+
 ##How to play
 
 - The goal is to reach the pool at the top of the screen while avoiding the bugs
