@@ -25,6 +25,7 @@ var Engine = (function(global) {
         ctx = canvas.getContext('2d'),
         lastTime;
 
+    //Set some default attributes like size, and the font style to use for the score
     canvas.width = 505;
     canvas.height = 606;
     ctx.font = "20px sans-serif";
@@ -166,7 +167,7 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
+        // Saving this for later versions
     }
 
     /* Go ahead and load all of the images we know we're going to need to
