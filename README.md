@@ -6,6 +6,9 @@ It's the middle of summer and the heat is up! Make your way to the pool for a co
 
 [Live version] (http://nicksorrell.com/udacity/frogger/)
 
+##How to run the game
+- Simply place all the files in the same location, open index.html, and you're good to go
+
 ##How to play
 
 - The goal is to reach the pool at the top of the screen while avoiding the bugs
