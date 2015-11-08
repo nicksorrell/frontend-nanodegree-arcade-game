@@ -59,7 +59,7 @@ GoldEnemy.prototype = Object.create(Enemy.prototype);
 GoldEnemy.prototype.update = function(dt) {
     this.x -= this.speed * dt;
     if(this.x < -(this.delay * 100)) this.reset();
-    if(this.x <= player.x + 50 && this.row == player.row) player.reset();
+    if(this.x <= player.x + 50 && this.x > player.x && this.row == player.row) player.reset();
 };
 
 GoldEnemy.prototype.reset = function(){
@@ -74,7 +74,7 @@ GoldEnemy.prototype.reset = function(){
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function() {
-  this.sprite = 'images/char-boy.png';
+  this.sprite = 'images/char-pink-girl.png';
   this.row = 1;
   this.startX = 200;
   this.startY = 400;
@@ -88,6 +88,7 @@ Player.prototype.update = function(dt) {
   if(this.x < 0) this.x = 0;
   if(this.row > 5) {
     this.reset();
+    theScore.add(50);
   }
   if(this.x > 400 ) this.x = 400;
   if(this.row < 1 ) {
@@ -124,9 +125,16 @@ var gem = {};
 gem.prototype = {
   sprite: 'images/Gem Blue.png',
   column: 0,
+  colors : [
+    'images/Gem Blue.png',
+    'images/Gem Green.png',
+    'images/Gem Orange.png'
+  ],
   update: function(){
     if(player.x >= this.column*100 && player.x < this.column*100+15 && player.row > 5) {
       this.column = Math.floor(Math.random() * (5));
+      this.sprite = this.colors[Math.floor(Math.random() * (3))];
+      theScore.add(200);
     }
   },
   render: function(){
@@ -136,17 +144,21 @@ gem.prototype = {
 
 gem.create = function(color, column){
   var obj = Object.create(gem.prototype);
-  var colors = {
-    'blue' : 'images/Gem Blue.png',
-    'green': 'images/Gem Green.png',
-    'orange': 'images/Gem Orange.png'
-  };
-  obj.sprite = colors[color] || 'images/Gem Blue.png';
+  obj.sprite = obj.colors[color] || 'images/Gem Blue.png';
   obj.column = column || 0;
   return obj;
 };
 
-var myGem = gem.create('green', 3);
+var score = {
+  points: 0,
+  add: function(points){
+    this.points += points;
+  },
+  render: function(points){
+    ctx.clearRect(0,0,100,50);
+    ctx.fillText("Score: " + this.points, 0, 30);
+  }
+};
 
 
 // Now instantiate your objects.
@@ -155,7 +167,8 @@ var myGem = gem.create('green', 3);
 var allEnemies = [];
 allEnemies.push(new Enemy(3), new Enemy(4), new Enemy(5), new Enemy(4, 3), new Enemy(5, 1), new GoldEnemy(8));
 var player = new Player();
-
+var theGem = gem.create(1, 3);
+var theScore = Object.create(score);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

@@ -1,3 +1,15 @@
 body {
     text-align: center;
+    background: #B9D3E0;
+    font-family: sans-serif;
+}
+
+#instructions {
+  width: 960px;
+  margin: 0 auto;
+  padding: 10px;
+  background: #fff;
+  border: 3px solid #426475;
+  -moz-box-shadow: 1px 1px 3px #555;
+  box-shadow: 1px 1px 3px #555;
 }

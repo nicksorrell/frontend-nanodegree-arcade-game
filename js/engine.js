@@ -27,6 +27,8 @@ var Engine = (function(global) {
 
     canvas.width = 505;
     canvas.height = 606;
+    ctx.font = "20px sans-serif";
+    ctx.fillColor = "black";
     doc.body.appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
@@ -94,7 +96,7 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        myGem.update();
+        theGem.update();
         player.update();
 
     }
@@ -150,14 +152,13 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
-        myGem.render();
+        theGem.render();
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
 
         player.render();
-
-
+        theScore.render();
     }
 
     /* This function does nothing but it could have been a good place to
@@ -178,7 +179,7 @@ var Engine = (function(global) {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/enemy-bug-gold.png',
-        'images/char-boy.png',
+        'images/char-pink-girl.png',
         'images/Gem Blue.png',
         'images/Gem Green.png',
         'images/Gem Orange.png'
