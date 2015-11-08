@@ -14,11 +14,8 @@ var Enemy = function(row, delay) {
     };
     this.row = row || 3;
     this.speed = Math.floor(Math.random() * 250) + 100;
-    this.width = 171;
     this.x = 0 - (this.delay * 100);
     this.y = rowsY[row];
-    this.gridX = 0;
-    this.gridY = 0;
 };
 
 // Update the enemy's position, required method for game
@@ -39,7 +36,38 @@ Enemy.prototype.render = function() {
 
 Enemy.prototype.reset = function() {
   this.x = -100 - (this.delay * 100);
-  this.speed = Math.floor(Math.random() * 250) + 100;
+  this.speed = Math.floor(Math.random() * (250-100)) + 100;
+};
+
+var GoldEnemy = function(delay){
+  this.sprite = 'images/enemy-bug-gold.png';
+  this.delay = delay || 5;
+  this.rowsY = {
+    3: 220,
+    4: 140,
+    5: 50
+  };
+  this.speed = Math.floor(Math.random() * 500) + 400;
+  this.x = 0 + (this.delay * 100);
+  var rand = Math.floor(Math.random() * (6-3)) + 3;
+  this.row = rand;
+  this.y = this.rowsY[rand];
+};
+
+GoldEnemy.prototype = Object.create(Enemy.prototype);
+
+GoldEnemy.prototype.update = function(dt) {
+    this.x -= this.speed * dt;
+    if(this.x < -(this.delay * 100)) this.reset();
+    if(this.x <= player.x + 50 && this.row == player.row) player.reset();
+};
+
+GoldEnemy.prototype.reset = function(){
+  this.x = 0 + (this.delay * 100);
+  var rand = Math.floor(Math.random() * (6-3)) + 3;
+  this.row = rand;
+  this.y = this.rowsY[rand];
+  this.speed = Math.floor(Math.random() * 500) + 400;
 };
 
 // Now write your own player class
@@ -91,11 +119,41 @@ Player.prototype.reset = function(){
   this.row = 1;
 };
 
+var gem = {};
+
+gem.prototype = {
+  sprite: 'images/Gem Blue.png',
+  column: 0,
+  update: function(){
+    if(player.x >= this.column*100 && player.x < this.column*100+15 && player.row > 5) {
+      this.column = Math.floor(Math.random() * (5));
+    }
+  },
+  render: function(){
+    ctx.drawImage(Resources.get(this.sprite), this.column*100 + 15, 25, 70, 100);
+  }
+};
+
+gem.create = function(color, column){
+  var obj = Object.create(gem.prototype);
+  var colors = {
+    'blue' : 'images/Gem Blue.png',
+    'green': 'images/Gem Green.png',
+    'orange': 'images/Gem Orange.png'
+  };
+  obj.sprite = colors[color] || 'images/Gem Blue.png';
+  obj.column = column || 0;
+  return obj;
+};
+
+var myGem = gem.create('green', 3);
+
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [];
-allEnemies.push(new Enemy(3), new Enemy(4), new Enemy(5), new Enemy(4, 3), new Enemy(5, 1));
+allEnemies.push(new Enemy(3), new Enemy(4), new Enemy(5), new Enemy(4, 3), new Enemy(5, 1), new GoldEnemy(8));
 var player = new Player();
 
 
